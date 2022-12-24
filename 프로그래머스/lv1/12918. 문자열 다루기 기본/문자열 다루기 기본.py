@@ -10,3 +10,8 @@ def solution(s):
             answer = False
             break
     return answer
+
+'''
+다른 풀이 : 
+return s.isdigit() and len(s) in (4, 6)
+'''
