@@ -1,14 +1,21 @@
 import sys 
 
-dices = list(map(int, sys.stdin.readline().split()))
+def diff(num):
+    num = str(num)
+    diff = 0 
+    if len(num) >= 3 : 
+        diff = int(num[1]) - int(num[0])
+        for i in range(1, len(num)-1) : 
+            if diff != (int(num[i+1])-int(num[i])):
+                return False
+    return True
 
-if dices[0]==dices[1] and dices[1]==dices[2] : 
-    print(10000 + 1000*dices[0])
-elif dices[0]==dices[1] and dices[1]!=dices[2] : 
-    print(1000+dices[0]*100)
-elif dices[0]!=dices[1] and dices[1]==dices[2] : 
-    print(1000+dices[1]*100)
-elif dices[0]==dices[2] and dices[1]!=dices[2] : 
-    print(1000+dices[0]*100)
-else : 
-    print(max(dices)*100)
+def solve(num):
+    count = 0
+    for i in range(1,num+1):
+        if diff(i):
+            count+=1
+    return count
+
+n = int(sys.stdin.readline())
+print(solve(n))
