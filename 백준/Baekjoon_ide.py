@@ -1,21 +1,21 @@
 import sys 
 
-def diff(num):
-    num = str(num)
-    diff = 0 
-    if len(num) >= 3 : 
-        diff = int(num[1]) - int(num[0])
-        for i in range(1, len(num)-1) : 
-            if diff != (int(num[i+1])-int(num[i])):
-                return False
-    return True
+s = sys.stdin.readline().rstrip()
+croatian_set = set(['c=', 'c-','dz=','d-','lj','nj','s=','z='])
+answer = 0
 
-def solve(num):
-    count = 0
-    for i in range(1,num+1):
-        if diff(i):
-            count+=1
-    return count
+for i in range(len(s)):
+    if s[i] == '=' or s[i] =='-' or s[i] == 'j' : 
+        if i >= 2 : 
+            if s[i-2:i+1] in croatian_set : 
+                answer -= 1
+            elif s[i-1:i+1] not in croatian_set: 
+                answer += 1
+        else : 
+            if s[i-1:i+1] not in croatian_set: 
+                answer += 1
+    else : 
+        answer += 1
 
-n = int(sys.stdin.readline())
-print(solve(n))
+
+print(answer)
