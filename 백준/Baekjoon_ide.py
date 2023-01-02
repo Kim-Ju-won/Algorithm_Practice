@@ -1,7 +1,12 @@
 import sys
 
+def fib(i):
+    if i==0 : 
+        return 0
+    elif i == 1 : 
+        return 1
+    else : 
+        return fib(i-1)+fib(i-2)
+
 n =int(sys.stdin.readline())
-ans = 1
-for i in range(1,n+1):
-    ans*=i
-print(ans)
+print(fib(n))
