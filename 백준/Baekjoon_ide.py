@@ -1,38 +1,26 @@
 import sys
 
-def draw_star(n):
-    ans =[[ '*' for _ in range(n)] for _ in range(n)]
-    if n == 3 : 
-        k = n//3
-        for i in range(k,k+k):
-            for j in range(k,k+k):
-                ans[i][j]=' '
-        return ans
-    else : 
-        k = n// 3
-        for i in range(0,n,k):
-            for j in range(0,n,k):
-                if i % n == k and j % n == k :  
-                    for l in range(i,i+k):
-                        for m in range(j,j+k):
-                            ans[l][m] =' '
-                else : 
-                    temp = draw_star(k)
-                    t1 = 0 
-                    for l in range(i,i+k):
-                        t2 = 0 
-                        for m in range(j,j+k):
-                            ans[l][m] =temp[t1][t2]
-                            t2+=1
-                        t1+=1
-        return ans
-
-
-
-n = int(sys.stdin.readline())
-
-ans = draw_star(n)
+n, m = tuple(map(int, sys.stdin.readline().split()))
+chess = []
+min_paint = 65
+bw = [['B','W'], ['W','B']]
 for i in range(n):
-    for j in range(n):
-        print(ans[i][j], end = '')
-    print()
+    chess.append(sys.stdin.readline().rstrip())
+
+for p in bw : 
+    for i in range(n-7):
+        for j in range(m-7):
+            paint = 0
+            for l in range(i, i+8):
+                for k in range(j,j+8):
+                    if (l+k)%2 == 0 : 
+                        if chess[l][k] != p[0]:
+                            paint+=1
+                    else : 
+                        if chess[l][k] != p[1]:
+                            paint+=1
+            if min_paint > paint : 
+                min_paint = paint
+                
+
+print(min_paint)
