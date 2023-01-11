@@ -1,4 +1,4 @@
-import sys,math
+import sys, math
 
 n = int(sys.stdin.readline())
 
