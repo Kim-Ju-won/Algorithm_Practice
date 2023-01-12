@@ -1,20 +1,10 @@
-import heapq 
+import sys 
 
-pq = []
-
-heapq.heappush(pq, 1)
-print(pq)
-heapq.heappush(pq, 1)
-print(pq)
-heapq.heappush(pq, 2)
-print(pq)
-heapq.heappush(pq, 4)
-print(pq)
-heapq.heappush(pq, 3)
-print(pq)
-heapq.heappush(pq, 5)
-print(pq)
-heapq.heappop(pq)
-print(pq)
-heapq.heappush(pq, 9)
-print(pq)
+n, m = tuple(map(int, sys.stdin.readline().split()))
+gcd = -1
+for i in range(1, min(n,m)+1):
+    if n % i == 0 and m %i  == 0 : 
+        gcd = i 
+lcm = n * ( m//gcd)
+print(gcd)
+print(lcm)
