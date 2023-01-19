@@ -32,19 +32,18 @@ def n_queens(chess, n):
             elif n == len(chess)-1:
                 count+=1
 
-for i in range(len(chess[0])//2):
-    if check_possibility(0,i,chess):
-        chess[0][i] = 1
-        n_queens(chess,1)
-        chess[0][i] = 0
-
-count *=2
-if len(chess[0])%2 == 1 : 
-    if check_possibility(0,len(chess[0])//2,chess):
-        chess[0][len(chess[0])//2] = 1
-        n_queens(chess,1)
-        chess[0][len(chess[0])//2] = 0
 if n == 1 : 
-    print(count+1)
+    n_queens(chess,0)
 else : 
-    print(count)
+    for i in range(len(chess[0])//2):
+        if check_possibility(0,i,chess):
+            chess[0][i] = 1
+            n_queens(chess,1)
+            chess[0][i] = 0
+    count *=2
+    if len(chess[0])%2 == 1 : 
+        if check_possibility(0,len(chess[0])//2,chess):
+            chess[0][len(chess[0])//2] = 1
+            n_queens(chess,1)
+            chess[0][len(chess[0])//2] = 0
+print(count)
