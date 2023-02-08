@@ -1,22 +1,20 @@
 import sys
 
-n, s = tuple(map(int, sys.stdin.readline().split()))
+n = int(sys.stdin.readline())
 arr = list(map(int, sys.stdin.readline().split()))
-arr.sort()
-j = 1
-check_sum = arr[0]
-ans = sys.maxsize
+
+new_arr = []
+for ele in arr : 
+    new_arr.append(ele)
+new_arr.sort()
+check = True
 
 for i in range(n):
-    while j < n and check_sum < s :
-        check_sum += arr[j]
-        j += 1
-    if check_sum >= s : 
-        ans = min(ans, j-i)
-    check_sum -= arr[i]
-if ans != sys.maxsize: 
-    print(ans)
+    if (new_arr[i]*arr[i])**0.5 != int((new_arr[i]*arr[i])**0.5 ):
+        check=False
+        break
 
+if check : 
+    print("YES")
 else : 
-    print(0)
-
+    print("NO")
