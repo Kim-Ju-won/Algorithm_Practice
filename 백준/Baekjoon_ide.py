@@ -1,20 +1,28 @@
-import sys
+import sys 
 
-n = int(sys.stdin.readline())
-arr = list(map(int, sys.stdin.readline().split()))
+t = int(sys.stdin.readline())
 
-new_arr = []
-for ele in arr : 
-    new_arr.append(ele)
-new_arr.sort()
-check = True
+prime_list = [1]*1000001
 
-for i in range(n):
-    if (new_arr[i]*arr[i])**0.5 != int((new_arr[i]*arr[i])**0.5 ):
-        check=False
-        break
+for i in range(2,1001):
+    k = 2 
+    while k*i < len(prime_list):
+        prime_list[k*i] = 0
+        k+=1
+prime_set =set()
+for i in range(len(prime_list)) : 
+    if prime_list[i] == 1 : 
+        prime_set.add(i)
 
-if check : 
-    print("YES")
-else : 
-    print("NO")
+keys = list(prime_set)
+keys.sort()
+
+for _ in range(t):
+    k = int(sys.stdin.readline())
+    ans = 0
+    for key in keys[2:] : 
+        if key > k//2 : 
+            break
+        if (k-key) in prime_set : 
+            ans+=1
+    print(ans)
