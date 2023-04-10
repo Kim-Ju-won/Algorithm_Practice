@@ -1,28 +1,15 @@
-import sys 
+import sys
 
-t = int(sys.stdin.readline())
+INT_MAX = sys.maxsize
 
-prime_list = [1]*1000001
+n = int(sys.stdin.readline())
+graph = [INT_MAX]* (n) + [0]
 
-for i in range(2,1001):
-    k = 2 
-    while k*i < len(prime_list):
-        prime_list[k*i] = 0
-        k+=1
-prime_set =set()
-for i in range(len(prime_list)) : 
-    if prime_list[i] == 1 : 
-        prime_set.add(i)
-
-keys = list(prime_set)
-keys.sort()
-
-for _ in range(t):
-    k = int(sys.stdin.readline())
-    ans = 0
-    for key in keys[2:] : 
-        if key > k//2 : 
-            break
-        if (k-key) in prime_set : 
-            ans+=1
-    print(ans)
+for i in range(n, 0, -1):
+    if i*3 <= n: 
+        graph[i] = min(graph[i+1]+1, graph[i*3]+1,graph[i*2]+1)
+    elif i*2 <= n : 
+        graph[i] = min(graph[i+1]+1, graph[i*2]+1)
+    elif i+1 <= n : 
+        graph[i] = graph[i+1]+1
+print(graph[1])
