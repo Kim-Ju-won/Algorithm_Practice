@@ -49,7 +49,7 @@ def BFS(n, m, maze):
 
 BFS(n, m, maze)
 print(
-    -1
+    -1 
     if (visited_0[n - 1][m - 1] == sys.maxsize)
     and (visited_1[n - 1][m - 1] == sys.maxsize)
     else min(visited_0[n - 1][m - 1], visited_1[n - 1][m - 1])
