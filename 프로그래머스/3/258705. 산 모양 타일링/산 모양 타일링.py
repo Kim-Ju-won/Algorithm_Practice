@@ -1,29 +1,20 @@
 def solution(n, tops):
-    answer = 0
-    DP_n = [0 for _ in range(n+2)]
-    DP_n1 = [0 for _ in range(n+2)]
-    
-    for i in range(n+2):
-        if i == 1 : 
-            if tops[i-1] == 1 :
-                DP_n[i] = 3
-            else : 
-                DP_n[i] = 2
-            DP_n1[i] = 1
-        elif i == 2:
-            DP_n[i] = DP_n[i-1] * 2 + 1
-            if i < n and tops[i] == 1 : 
-                DP_n1[i] = DP_n[i-1] + DP_n1[i-1]  *3
-            elif i >= n or (tops[i] == 0): 
-                DP_n1[i] = DP_n1[i-1] * 2 + 1 
-        elif i >= 3 :   
-            DP_n[i] = DP_n[i-1] * 2 + DP_n1[i-1]
-                
-            if i < n and tops[i-1] == 1:
-                DP_n1[i] = DP_n[i-1] + DP_n1[i-1] *3
-            elif i >= n or (tops[i-1] == 0): 
-                DP_n1[i] = DP_n1[i-1] * 2 + DP_n[i-2]
+    MOD = 10007
+    a, b, c, d = [0] * n, [0] * n, [0] * n, [0] * n
+    for i in range(n):
+        if i == 0:
+            a[i], b[i], c[i], d[i] = 1, 1, 1, 1
+            if tops[0] == 0:
+                d[i] = 0
+            continue
+        
+        a[i] = (a[i-1] + b[i-1] + c[i-1] + d[i-1]) % MOD
+        b[i] = (a[i-1] + b[i-1] + d[i-1]) % MOD
+        c[i] = (a[i-1] + b[i-1] + c[i-1] + d[i-1]) % MOD
+        d[i] = (a[i-1] + b[i-1] + c[i-1] + d[i-1]) % MOD
+        
+        if tops[i] == 0:
+                d[i] = 0
 
-    print(DP_n1)
-    print(DP_n)
-    return (DP_n1[-1])%10007
+    answer = a[-1] + b[-1] + c[-1] + d[-1]
+    return answer % MOD
