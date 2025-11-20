@@ -16,7 +16,7 @@ n, m, b = tuple(map(int, sys.stdin.readline().split()))
 minecraft = [list(map(int, sys.stdin.readline().split())) for _ in range(n)]
 min_time = 2 * 256 * 500 * 500 + 1
 max_height = 0 
-
+b = min(b, 256 * 500 * 500)
 for height in range(257) : 
     inventory = b 
     time = 0 
