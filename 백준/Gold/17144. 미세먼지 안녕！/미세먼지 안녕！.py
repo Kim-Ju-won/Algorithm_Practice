@@ -89,31 +89,26 @@ lower_air_purifier.popleft()
 for _ in range(t):
     q = deque([])
     new_graph = [[0 for _ in range(m)] for _ in range(n)]
+    
     for i in range(n):
         for j in range(m):
-            if graph[i][j] > 0 : 
-                q.append((i,j))
+            if graph[i][j]//5 >= 1 : 
+                plus = graph[i][j]//5
+                count = 0 
+                for x, y in zip(dx, dy):
+                    if in_range(x+i, y+j, n, m) and graph[i+x][j+y] != -1 : 
+                        new_graph[x+i][y+j] += plus
+                        count += 1
+                new_graph[i][j] += graph[i][j] - plus*count
 
-
-    while q : 
-        i, j = q.popleft()
-        if graph[i][j]//5 >= 1 : 
-            plus = graph[i][j]//5
-            count = 0 
-            for x, y in zip(dx, dy):
-                if in_range(x+i, y+j, n, m) and graph[i+x][j+y] != -1 : 
-                    new_graph[x+i][y+j] += plus
-                    count += 1
-            new_graph[i][j] += graph[i][j] - plus*count
-        else : 
-            new_graph[i][j] += graph[i][j]
+            else : 
+                new_graph[i][j] += graph[i][j]
 
     for i in range(n):
         for j in range(m):
-            if new_graph[i][j] >0 :
-                graph[i][j] = new_graph[i][j]
+            graph[i][j] = new_graph[i][j]
 
-
+    
     temp_deque = deque([])
     for point in upper_air_purifier:
         r, c = point 
